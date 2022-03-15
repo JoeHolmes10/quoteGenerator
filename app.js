@@ -10,6 +10,10 @@ let slide = document.querySelector('.slide');
 
 let lightMoIcon = document.querySelector('.fa-sun');
 
+let translateBtn = document.querySelector('.fa-language');
+
+let copy = document.querySelector('.copy');
+
 let quotes = [
     '“Be yourself; everyone else is already taken.”― Oscar Wilde ',
     "“I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best.”― Marilyn Monroe ",
@@ -73,7 +77,10 @@ darkMoIcon.addEventListener('click', function () {
 });
 
 lightMoIcon.addEventListener('click', function () {
-    if (!darkMoIcon.classList.contains('active') || darkMoIcon.classList.contains('active')) {
+    if (
+        !darkMoIcon.classList.contains('active') ||
+        darkMoIcon.classList.contains('active')
+    ) {
         slide.style.width = `0%`;
         subBtn.style.backgroundColor = '#1d2a35';
         container.style.backgroundColor = '#eee';
@@ -85,3 +92,20 @@ lightMoIcon.addEventListener('click', function () {
         window.localStorage.clear();
     }
 });
+
+translateBtn.addEventListener('click', function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+        { pageLanguage: 'en' },
+        'google_translate_element'
+    );
+});
+
+copy.addEventListener('click', function () {
+    var r = document.createRange();
+    r.selectNode(p);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(r);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+});
+
