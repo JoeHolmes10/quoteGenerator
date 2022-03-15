@@ -107,5 +107,13 @@ copy.addEventListener('click', function () {
     window.getSelection().addRange(r);
     document.execCommand('copy');
     window.getSelection().removeAllRanges();
+    let ele =document.createElement('div')
+    ele.id = 'suc'
+    document.body.appendChild(ele)
+    ele.innerText = 'Copied Successfully'
+    function time() {
+        ele.remove()
+    }
+    setTimeout(time,1500)
 });
 
