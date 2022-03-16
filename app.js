@@ -14,42 +14,28 @@ let translateBtn = document.querySelector('.fa-language');
 
 let copy = document.querySelector('.copy');
 
-let quotes = [
-    '“Be yourself; everyone else is already taken.”― Oscar Wilde ',
-    "“I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best.”― Marilyn Monroe ",
-    "“Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.”― Albert Einstein ",
-    '“So many books, so little time.”― Frank Zappa ',
-    '“So many books, so little time.”― Frank Zappa ',
-    "“Be who you are and say what you feel, because those who mind don't matter, and those who matter don't mind.”― Bernard M. Baruch ",
-    "“You've gotta dance like there's nobody watching,Love like you'll never be hurt,Sing like there's nobody listening,And live like it's heaven on earth.”― William W. Purkey ",
-    "“You know you're in love when you can't fall asleep because reality is finally better than your dreams.”― Dr. Seuss ",
-    '“You only live once, but if you do it right, once is enough.”― Mae West',
-    '“Be the change that you wish to see in the world.”― Mahatma Gandhi ',
-    "“In three words I can sum up everything I've learned about life: it goes on.”― Robert Frost ",
-    "“If you want to know what a man's like, take a good look at how he treats his inferiors, not his equals.”― J.K. Rowling, Harry Potter and the Goblet of Fire ",
-    '“Don’t walk in front of me… I may not followDon’t walk behind me… I may not leadWalk beside me… just be my friend”― Albert Camus ',
-    "“If you tell the truth, you don't have to remember anything.”― Mark Twain ",
-    '“Friendship ... is born at the moment when one man says to another "What ! You too ? I thought that no one but myself . . .”― C.S. Lewis',
-    "“I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.”― Maya Angelou ",
-    '“A friend is someone who knows all about you and still loves you.”― Elbert Hubbard ',
-    'كن التغير الذي تريد أن تراه في العالم',
-    'لا يوجد طريق مختصر إلى مكان يستحق الذهاب إليه',
-    ' “يمكن أن تحكم الناس بالخوف والقمع ، لكن الخائفين لايمكن ان ينتصروا في حرب ، في ساحة الحرب يجب أن يكونوا أحراراً” ',
-    ' “من العسير على نفسي أن أتصور الجمال غير مقترن بالفضيلة، الجمال الحق والفضيلة الحقة شيئ واحد” ',
-    '“Language is the key to the heart of people.”― Ahmed Deedat ',
-    ' “الشر الناتج عن سبب كبير لأجدر بالتقدير من شر نشأ عن سبب تافه حقير” ',
-    '“If I could talk it like Dahoum, you would never be tired of listening to me.”― T. E. Lawrence',
-    ' “في قصص حلو تبقى بالقلب وما تنكتب عوراق ولا تنقال لحدا... قصص مش لحدا غيرك...” ',
-];
+const Http = new XMLHttpRequest();
+const url = 'https://free-quotes-api.herokuapp.com/';
+Http.open('GET', url);
+Http.send();
+
+Http.onreadystatechange = (e) => {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(Http.responseText);
+    }
+};
 
 subBtn.addEventListener('click', function () {
-    let GenQoute = Math.floor(Math.random() * quotes.length);
-    p.textContent = quotes[GenQoute];
+    $.getJSON(url, function (result) {
+        p.textContent = `${result.quote} (${result.author})`;
+    });
 });
 
 window.onload = function () {
-    let GenQoute = Math.floor(Math.random() * quotes.length);
-    p.textContent = quotes[GenQoute];
+    $.getJSON(url, function (result) {
+        p.textContent = `${result.quote} (${result.author})`;
+    });
+    p.textContent = Http.responseText;
     if (window.localStorage.length > 0) {
         slide.style.width = window.localStorage.getItem('slide');
         subBtn.style.backgroundColor = window.localStorage.getItem('main');
@@ -107,13 +93,12 @@ copy.addEventListener('click', function () {
     window.getSelection().addRange(r);
     document.execCommand('copy');
     window.getSelection().removeAllRanges();
-    let ele =document.createElement('div')
-    ele.id = 'suc'
-    document.body.appendChild(ele)
-    ele.innerText = 'Copied Successfully'
+    let ele = document.createElement('div');
+    ele.id = 'suc';
+    document.body.appendChild(ele);
+    ele.innerText = 'Copied Successfully';
     function time() {
-        ele.remove()
+        ele.remove();
     }
-    setTimeout(time,1500)
+    setTimeout(time, 1500);
 });
-
