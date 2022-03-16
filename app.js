@@ -35,7 +35,6 @@ window.onload = function () {
     $.getJSON(url, function (result) {
         p.textContent = `${result.quote} (${result.author})`;
     });
-    p.textContent = Http.responseText;
     if (window.localStorage.length > 0) {
         slide.style.width = window.localStorage.getItem('slide');
         subBtn.style.backgroundColor = window.localStorage.getItem('main');
