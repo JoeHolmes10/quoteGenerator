@@ -8,11 +8,15 @@ let darkMoIcon = document.querySelector('.fa-moon');
 
 let slide = document.querySelector('.slide');
 
-let lightMoIcon = document.querySelector('.fa-sun');
+let lightMoIcon = document.querySelector('.bi-brightness-high');
 
-let translateBtn = document.querySelector('.fa-language');
+let translateBtn = document.querySelector('.translate');
 
 let copy = document.querySelector('.copy');
+
+let hideGoogleTranslate = document.querySelector('.google');
+
+let xIcon = document.querySelector('.bi-x-circle');
 
 const Http = new XMLHttpRequest();
 const url = 'https://free-quotes-api.herokuapp.com/';
@@ -81,7 +85,10 @@ lightMoIcon.addEventListener('click', function () {
 translateBtn.addEventListener('click', function googleTranslateElementInit() {
     new google.translate.TranslateElement(
         { pageLanguage: 'en' },
-        'google_translate_element'
+        'google_translate_element',
+        translateBtn.classList.add('thide'),
+        xIcon.classList.remove('shide'),
+        (hideGoogleTranslate.style.display = 'block')
     );
 });
 
@@ -100,4 +107,10 @@ copy.addEventListener('click', function () {
         ele.remove();
     }
     setTimeout(time, 1500);
+});
+
+xIcon.addEventListener('click', () => {
+    hideGoogleTranslate.style.display = 'none';
+    translateBtn.classList.remove('thide');
+    xIcon.classList.add('shide');
 });
