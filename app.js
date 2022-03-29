@@ -18,6 +18,10 @@ let hideGoogleTranslate = document.querySelector('.google');
 
 let xIcon = document.querySelector('.bi-x-circle');
 
+let placeHolder = document.querySelector('.content-wrapper')
+let placeHolder1 = document.querySelector('.shaker')
+let placeHolder2 = document.querySelector('.Holmes')
+
 const Http = new XMLHttpRequest();
 const url = 'https://free-quotes-api.herokuapp.com/';
 Http.open('GET', url);
@@ -114,3 +118,9 @@ xIcon.addEventListener('click', () => {
     translateBtn.classList.remove('thide');
     xIcon.classList.add('shide');
 });
+
+window.addEventListener('load', function () {
+    placeHolder.classList.add('loadHide');
+    placeHolder1.classList.add('loadHide');
+    placeHolder2.classList.add('loadHide');
+})
