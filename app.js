@@ -23,7 +23,7 @@ let placeHolder1 = document.querySelector('.shaker')
 let placeHolder2 = document.querySelector('.Holmes')
 
 const Http = new XMLHttpRequest();
-const url = 'https://free-quotes-api.herokuapp.com/';
+const url = 'https://bts-quotes-api.herokuapp.com/quote/random';
 Http.open('GET', url);
 Http.send();
 
@@ -33,15 +33,16 @@ Http.onreadystatechange = (e) => {
     }
 };
 
+
 subBtn.addEventListener('click', function () {
     $.getJSON(url, function (result) {
-        p.textContent = `${result.quote} (${result.author})`;
+        p.textContent = `${result.quote}`;
     });
 });
 
 window.onload = function () {
     $.getJSON(url, function (result) {
-        p.textContent = `${result.quote} (${result.author})`;
+        p.textContent = `${result.quote} `;
     });
     if (window.localStorage.length > 0) {
         slide.style.width = window.localStorage.getItem('slide');
